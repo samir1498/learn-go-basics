@@ -2,10 +2,20 @@ package main
 
 import (
 	"fmt"
+	"errors"
 )
 
 func add(a, b float64) float64 {
 	return a + b
+}
+
+// Variadic function
+func sum(nums ...int) int {
+	total := 0
+	for _, num := range nums {
+		total += num
+	}
+	return total
 }
 
 // Define a struct
@@ -67,9 +77,31 @@ func main() {
 	arr[1] = 2
 	arr[2] = 3
 	fmt.Println(arr)
+	// Arrays
+	myInts := [3]int{1, 2, 3}
+	fmt.Println(myInts)
 	// Slices
 	slice := []int{1, 2, 3}
 	slice = append(slice, 4)
 	fmt.Println(slice)
+	// make slice with capacity make(slice, length, capacity)
+	slice2 := make([]int, 3, 6)
+	slice2[0] = 1
+	slice2[1] = 2
+	slice2[2] = 3
+	fmt.Println(slice2)
+	// slice literal
+	mySlice := []int{1, 2, 3}
+	fmt.Println(mySlice)
+	// length of slice
+	fmt.Println("length of slice:", len(mySlice))
+	// capacity of slice
+	fmt.Println("capacity of slice:", cap(slice2))
+	// errors
+	err := errors.New("error created")
+	fmt.Println(err)
+	// Variadic functions
+	total := sum(1, 2, 3, 4, 5)
+	fmt.Println(total)
 
 }
