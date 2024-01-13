@@ -56,5 +56,20 @@ func main() {
 	fmt.Println("Name:", p.Name)
     fmt.Println("Age:", p.Age)
 	// Interfaces
+	r:= Rectangle{
+		Width:  10,
+		Height: 20,
+	}
+	fmt.Printf("Area: %.2f\n", r.Area())
+	// Arrays
+	var arr [3]int
+	arr[0] = 1
+	arr[1] = 2
+	arr[2] = 3
+	fmt.Println(arr)
+	// Slices
+	slice := []int{1, 2, 3}
+	slice = append(slice, 4)
+	fmt.Println(slice)
 
 }
