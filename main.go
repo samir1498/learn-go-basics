@@ -1,12 +1,21 @@
 package main
 
 import (
-	"fmt"
 	"errors"
+	"fmt"
 )
 
-func add(a, b float64) float64 {
-	return a + b
+// CustomError is a custom error type for demonstration purposes
+type CustomError struct {
+	message string
+}
+
+func (e CustomError) Error() string {
+	return e.message
+}
+
+func add(a, b float64) (float64, error) {
+	return a + b, nil
 }
 
 // Variadic function
@@ -20,12 +29,12 @@ func sum(nums ...int) int {
 
 // Define a struct
 type Person struct {
-    Name string
-    Age  int
+	Name string
+	Age  int
 }
 
 // Define an interface
-type Shape interface {	
+type Shape interface {
 	Area() float64
 }
 
@@ -43,65 +52,90 @@ func (r Rectangle) Area() float64 {
 func main() {
 	// Hello, World!
 	fmt.Println("Hello, World!")
-	// variables
-	// verbose declaration
-	var a int = 10
-	// short declaration
+
+	// Variables
+	a := 10
 	b := "Hello"
 	c := 10.5
-	// sprintf
+
+	// Printf
 	d := fmt.Sprintf("a: %d, b: %s, c: %.2f", a, b, c)
-	// print
 	fmt.Println(d)
-	// functions
-	fmt.Println(add(10, 20))
-	// casting
-	fmt.Println(add(float64(a), c))
-	// structs
+
+	// Functions
+	result, err := add(10, 20)
+	if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Println("Sum:", result)
+	}
+
+	// Casting
+	result, err = add(float64(a), c)
+	if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Println("Sum:", result)
+	}
+
+	// Structs
 	p := Person{
 		Name: "John",
 		Age:  30,
 	}
 	fmt.Println(p)
 	fmt.Println("Name:", p.Name)
-    fmt.Println("Age:", p.Age)
+	fmt.Println("Age:", p.Age)
+
 	// Interfaces
-	r:= Rectangle{
+	r := Rectangle{
 		Width:  10,
 		Height: 20,
 	}
 	fmt.Printf("Area: %.2f\n", r.Area())
+
 	// Arrays
 	var arr [3]int
 	arr[0] = 1
 	arr[1] = 2
 	arr[2] = 3
 	fmt.Println(arr)
+
 	// Arrays
 	myInts := [3]int{1, 2, 3}
 	fmt.Println(myInts)
+
 	// Slices
 	slice := []int{1, 2, 3}
 	slice = append(slice, 4)
 	fmt.Println(slice)
-	// make slice with capacity make(slice, length, capacity)
+
+	// Make slice with capacity make(slice, length, capacity)
 	slice2 := make([]int, 3, 6)
 	slice2[0] = 1
 	slice2[1] = 2
 	slice2[2] = 3
 	fmt.Println(slice2)
-	// slice literal
+
+	// Slice literal
 	mySlice := []int{1, 2, 3}
 	fmt.Println(mySlice)
-	// length of slice
-	fmt.Println("length of slice:", len(mySlice))
-	// capacity of slice
-	fmt.Println("capacity of slice:", cap(slice2))
-	// errors
-	err := errors.New("error created")
+
+	// Length of slice
+	fmt.Println("Length of slice:", len(mySlice))
+
+	// Capacity of slice
+	fmt.Println("Capacity of slice:", cap(slice2))
+
+	// Errors
+	err = errors.New("error created")
 	fmt.Println(err)
+
+	// Custom Error
+	customErr := CustomError{"custom error message"}
+	fmt.Println("Custom Error:", customErr)
+
 	// Variadic functions
 	total := sum(1, 2, 3, 4, 5)
-	fmt.Println(total)
-
+	fmt.Println("Sum of numbers:", total)
 }
